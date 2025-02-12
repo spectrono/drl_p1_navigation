@@ -1,13 +1,14 @@
-import numpy as np
 import random
-from collections import namedtuple, deque
+from collections import deque, namedtuple
 
-from dqn_model import QNetworkAlpha
-
+import numpy as np
 import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
+from dqn_model import QNetworkAlpha
+
+# Define hyperparameter specific to the Agent
 BUFFER_SIZE = int(1e5)  # replay buffer size
 BATCH_SIZE = 128        # minibatch size
 GAMMA = 0.98            # discount factor
@@ -18,7 +19,9 @@ UPDATE_EVERY = 5        # how often to update the network
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class AgentPureDQN():
-    """Interacts with and learns from the environment by vanilla DQN."""
+    """Interacts with and learns from the environment by vanilla DQN
+    
+    """
 
     def __init__(self, state_size, action_size, seed):
         """Initialize an Agent object.
@@ -33,7 +36,7 @@ class AgentPureDQN():
         self.action_size = action_size
         self.seed = random.seed(seed)
 
-        # Q-Network
+        # Q-Networks
         self.qnetwork_local = QNetworkAlpha(state_size, action_size, seed).to(device)
         self.qnetwork_target = QNetworkAlpha(state_size, action_size, seed).to(device)
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=LR)
