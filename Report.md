@@ -1,4 +1,4 @@
-# Learning Algorithm
+# Report on DQN implementation
 
 ## Description of the algorithm
 
@@ -8,11 +8,35 @@ Some highlights:
 
 - *Deep neural networks* to approximate the Q-Value function
 - *Experience Replay* is used to collect experiences during training and replay them for adapting the underlying weights of the neural net. This helps to break the correlation between consecutive samples.
-- "Soft Update" to train the agent while maintaining a local and a target network. The local network is constantly updated via the experiences from the replay buffer. The target network is a copy of that local framework but is less frequently updated. This way, the Q-Value updates are less correlated with the current Q-value estimate, which stabilized the training and makes it more likeley to correlate.
+- "Soft Update" to train the agent while maintaining a local and a target network. The local network is constantly updated via the experiences from the replay buffer. The target network is a copy of that local network but is less frequently updated. This way, the Q-Value updates are less correlated with the current Q-value estimate, which stabilizes the training and makes it more likeley to converge.
 
-The implementation is given in the file *dqn_agent.py* alongside detailed comments on the code. The agent and it's environment is controlled via the provided *navigation.ipynb* jupyter notebook.
+The implementation is given in the file *dqn_agent.py* alongside detailed comments on the code. The agent and its environment is controlled via the provided *navigation.ipynb* jupyter notebook.
 
 ## Chosen hyperparameters
+
+To control the RL-agent several hyper parameter had to be choosen. First of all:
+
+- the maximum number of pisodes was set to: n_episodes=1800
+- and the maximum length of each episode was set to: max_t=1600
+
+The epsilon greedy strategy was controlled by:
+
+- an initial value of epsilon: eps_start=1.0
+- a minimum value of epsilon: eps_end=0.005
+- and an epsilin decay factor: eps_decay=0.997
+
+These parameters are set in the jupyter notebook *navigation.ipynb* in the function:
+
+*def dqn(env, agent, n_episodes=1800, max_t=1600, eps_start=1.0, eps_end=0.005, eps_decay=0.997):*
+
+The remaining hyperparameter are set at the beginning of the *dqn_agent.py* file:
+
+- The experience replay buffer size: BUFFER_SIZE = int(1e5)
+- The minibatch size which controls when enough samples are available in memory for doing a learning step: BATCH_SIZE = 128
+- The discount factor for new reward: GAMMA = 0.98
+- Fraction on how much the local and target networks are mixed during a soft update step: TAU = 1e-3
+- The learning rate:  LR = 5e-4
+- How often the network should be updated (measured in steps of an episode): UPDATE_EVERY = 5
 
 ## Architecture of the neural network
 
@@ -24,7 +48,7 @@ The selected architecture consists of four fully connected layers:
 - Third hidden layer with 16 neurons and ReLU activation function
 - Output layer with a size of 4 to represent the action space
 
-This realizes a mapping from state to Q-values for the possible actions. The implementaion of the neural network is given in *dqn_model.py* again with detailed comments on the code.
+This realizes a mapping from state to Q-values for the possible actions. The implementaion of the neural network is given in *dqn_model.py* again with detailed comments in the code.
 
 ## Results
 
@@ -38,13 +62,13 @@ The below plot shows the performance of the algorithm:
 
 Remark: Consider the environment as solved if the agent reaches at least a score of 13.
 
-### Example video during training
+### Example video from the training phase
 
 The video shows how the agent selects actions during training:
 
 [LearningAgent](./Agent_evaluation_recording_2025-02-12 23-01-56.mkv)
 
-### Example video of trained agent in the banana environment
+### Example video of trained agent acting in the banana environment
 
 Watch the video below to see the fully trained agent:
 
@@ -61,4 +85,4 @@ As pointed out in the *Rainbow: Combining Improvements in Deep Reinforcement Lea
 - Distributional DQN(opens in a new tab)
 - Noisy DQN
 
-A good start would probably be adding *Prioritized experience replay* because it only demands minimal changes of the current implementation and as stated in the Rainbow paper will provide much better performance than the vanilla DQN algorithm.
+A good start would probably be adding *Prioritized experience replay* because it only demands minimal changes of the current implementation and as stated in the *Rainbow* paper will provide better performance than the vanilla DQN algorithm.

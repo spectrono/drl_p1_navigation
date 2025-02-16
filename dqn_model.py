@@ -7,6 +7,9 @@ class QNetworkAlpha(nn.Module):
 
     def __init__(self, state_size, action_size, seed, hidden_layer_1=128, hidden_layer_2=64, hidden_layer_3=16):
         """Initialize parameters and build model.
+
+        The architecture consists of 4 fully connected (dense) layers with ReLU activation functions for the first three layers.
+        state_size and action_size can individually be controlled by the RL-agent. 
         Params
         ======
             state_size (int): Dimension of each state
