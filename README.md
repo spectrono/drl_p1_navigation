@@ -55,7 +55,7 @@ Place the zip file in the root folder of your cloned repo and unzip it. This sho
   2. The next cell wil import the DRL-Agent in "dqn_agent.py" and the used network architecture "dqn_model.py" to learn the Q-Values.
      1. Hint: uncomment the importlib section if you modified one of the files and want to reload them!
   3. Now import the "Banana" environment and print some basic information about it.
-  4. The next cell defined orchestrates the RL procedure. Using the provided parameters should should solve the environment in less then 1800 epochs. In my experience, the enviroment is solved at around 1000 steps with the provided parameter.
+  4. The next cell defined orchestrates the RL procedure. Using the provided parameters should solve the environment in less then 1800 epochs. In my experience, the enviroment is solved at around 1000 steps with the provided parameter.
   5. The next cell initializes the RL-Agent
   6. Now start the training by executing cell number six.
      1. During training, every 100 epochs a intermediate result of the mean score of the last 100 epochs is printed out. Also, the current epsilon factor is given.
