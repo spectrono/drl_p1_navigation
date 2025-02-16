@@ -16,6 +16,16 @@ The implementation is given in the file *dqn_agent.py* alongside detailed commen
 
 ## Architecture of the neural network
 
+The selected architecture consists of four fully connected layers:
+
+- Input layer of size 37 which represents the state space
+- First hidden layer with 128 neurons and ReLU activation function
+- Second hidden layer with 64 neurons and ReLU activation function
+- Third hidden layer with 16 neurons and ReLU activation function
+- Output layer with a size of 4 to represent the action space
+
+This realizes a mapping from state to Q-values for the possible actions. The implementaion of the neural network is given in *dqn_model.py* again with detailed comments on the code.
+
 ## Results
 
 The environment was solved by the implmenemted algorithm after 962 episodes reaching an average Score of 15.00.
