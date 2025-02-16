@@ -88,11 +88,9 @@ class AgentPureDQN():
         """
         states, actions, rewards, next_states, dones = experiences
         
-        ## TODO: compute and minimize the loss
-        "*** YOUR CODE HERE ***"
-
         # Get max predicted Q values (for next states) from target model
         Q_targets_next = self.qnetwork_target(next_states).detach().max(1)[0].unsqueeze(1)
+        
         # Compute Q targets for current states 
         Q_targets = rewards + (gamma * Q_targets_next * (1 - dones))
 
@@ -101,6 +99,7 @@ class AgentPureDQN():
 
         # Compute loss
         loss = F.mse_loss(Q_expected, Q_targets)
+
         # Minimize the loss
         self.optimizer.zero_grad()
         loss.backward()        
