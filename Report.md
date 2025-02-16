@@ -10,6 +10,8 @@ Some highlights:
 - *Experience Replay* is used to collect experiences during training and replay them for adapting the underlying weights of the neural net. This helps to break the correlation between consecutive samples.
 - "Soft Update" to train the agent while maintaining a local and a target network. The local network is constantly updated via the experiences from the replay buffer. The target network is a copy of that local framework but is less frequently updated. This way, the Q-Value updates are less correlated with the current Q-value estimate, which stabilized the training and makes it more likeley to correlate.
 
+The implementation is given in the file *dqn_agent.py* alongside detailed comments on the code. The agent and it's environment is controlled via the provided *navigation.ipynb* jupyter notebook.
+
 ## Chosen hyperparameters
 
 ## Architecture of the neural network
